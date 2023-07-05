@@ -1,8 +1,11 @@
 import { Icons } from '@/components/Icons';
+import UserAccountNav from '@/components/UserAccountNav';
 import { buttonVariants } from '@/components/ui/button';
+import { getAuthSession } from '@/lib/auth';
 import Link from 'next/link';
 
-export const Navbar = () => {
+export const Navbar = async () => {
+	const session = await getAuthSession();
 	return (
 		<nav className='fixed top-0 inset-x-0 h-fit py-2 bg-background z-10'>
 			<div className='container max-w-7xl h-full mx-auto flex items-center justify-between gap-2'>
@@ -12,10 +15,13 @@ export const Navbar = () => {
 						Chlebbit
 					</p>
 				</Link>
-
-				<Link href='/sign-in' className={buttonVariants()}>
-					Sign In
-				</Link>
+				{session?.user ? (
+					<UserAccountNav user={session.user} />
+				) : (
+					<Link href='/sign-in' className={buttonVariants()}>
+						Sign In
+					</Link>
+				)}
 			</div>
 		</nav>
 	);
