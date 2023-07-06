@@ -3,6 +3,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import React from 'react';
+import { ChevronLeftIcon } from '@radix-ui/react-icons';
 
 const SignInPage: React.FC = () => {
 	return (
@@ -14,6 +15,7 @@ const SignInPage: React.FC = () => {
 						buttonVariants({ variant: 'ghost' }),
 						'self-start -mt-20'
 					)}>
+					<ChevronLeftIcon className='w-4 h-4 mr-2' />
 					Home
 				</Link>
 				<SignIn />

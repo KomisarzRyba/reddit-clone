@@ -55,7 +55,7 @@ const UserAccountNav: React.FC<UserAccountNavProps> = ({ user }) => {
 					onSelect={(event) => {
 						event.preventDefault();
 						signOut({
-							callbackUrl: `/`,
+							callbackUrl: `${window.location.origin}/sign-in`,
 						});
 					}}
 					className='cursor-pointer'>

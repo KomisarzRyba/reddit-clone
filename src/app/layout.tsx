@@ -13,18 +13,23 @@ export const metadata = {
 
 export default function RootLayout({
 	children,
+	authModal,
 }: {
 	children: React.ReactNode;
+	authModal: React.ReactNode;
 }) {
 	return (
 		<html lang='en' className={inter.className} suppressHydrationWarning>
-			<body className='min-h-screen pt-12 antialiased'>
+			<body className='min-h-screen antialiased'>
 				<ThemeProvider
 					attribute='class'
 					defaultTheme='system'
 					enableSystem>
 					<Navbar />
-					{children}
+					{authModal}
+					<div className='container mx-auto h-full pt-24'>
+						{children}
+					</div>
 					<Toaster />
 				</ThemeProvider>
 			</body>
