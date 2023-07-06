@@ -1,11 +1,8 @@
+import { Button, ButtonProps } from '@/components/ui/button';
 import { ReloadIcon } from '@radix-ui/react-icons';
-import { Button, buttonVariants } from '@/components/ui/button';
 import { FC } from 'react';
-import { VariantProps } from 'class-variance-authority';
 
-interface LoadingButtonProps
-	extends React.HTMLAttributes<HTMLButtonElement>,
-		VariantProps<typeof buttonVariants> {
+interface LoadingButtonProps extends ButtonProps {
 	isLoading?: boolean;
 }
 
@@ -15,7 +12,7 @@ export const LoadingButton: FC<LoadingButtonProps> = ({
 	...props
 }) => {
 	return (
-		<Button disabled={isLoading} {...props}>
+		<Button {...props}>
 			{isLoading ? (
 				<ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
 			) : null}

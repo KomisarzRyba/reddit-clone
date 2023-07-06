@@ -22,9 +22,6 @@ export const authOptions: NextAuthOptions = {
 		async session({ token, session }) {
 			if (token) {
 				session.user.id = token.id;
-				session.user.name = token.name;
-				session.user.email = token.email;
-				session.user.image = token.picture;
 				session.user.username = token.username;
 			}
 
@@ -38,7 +35,7 @@ export const authOptions: NextAuthOptions = {
 			});
 
 			if (!dbUser) {
-				token.id = user.id;
+				token.id = user!.id;
 				return token;
 			}
 
@@ -68,4 +65,4 @@ export const authOptions: NextAuthOptions = {
 	},
 };
 
-export const getAuthSession = () => getServerSession();
+export const getAuthSession = () => getServerSession(authOptions);

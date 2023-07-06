@@ -1,9 +1,9 @@
-import SignIn from '@/components/SignIn';
+import SignUp from '@/components/SignUp';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { ChevronLeftIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
 import React from 'react';
-import { ChevronLeftIcon } from '@radix-ui/react-icons';
 
 const page: React.FC = () => {
 	return (
@@ -18,7 +18,7 @@ const page: React.FC = () => {
 					<ChevronLeftIcon className='w-4 h-4 mr-2' />
 					Home
 				</Link>
-				<SignIn />
+				<SignUp />
 			</div>
 		</div>
 	);
