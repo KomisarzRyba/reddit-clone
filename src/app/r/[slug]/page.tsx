@@ -1,4 +1,5 @@
 import MiniCreatePost from '@/components/MiniCreatePost';
+import PostFeed from '@/components/PostFeed';
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from '@/config';
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
@@ -39,7 +40,10 @@ const page: React.FC<pageProps> = async ({ params }) => {
 				r/{subreddit.name}
 			</h1>
 			<MiniCreatePost session={session} />
-			{/* TODO: Show posts in feed */}
+			<PostFeed
+				initialPosts={subreddit.posts}
+				subredditName={subreddit.name}
+			/>
 		</>
 	);
 };
