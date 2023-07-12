@@ -37,6 +37,7 @@
 		"@vercel/kv": "^0.2.2",
 		"autoprefixer": "10.4.14",
 		"axios": "^1.4.0",
+		"browserslist": "^4.21.9",
 		"class-variance-authority": "^0.6.1",
 		"clsx": "^1.2.1",
 		"cmdk": "^0.2.0",
@@ -66,5 +67,9 @@
 		"@types/editorjs__header": "^2.6.0",
 		"@types/lodash.debounce": "^4.0.7",
 		"prisma": "^4.16.2"
-	}
+	},
+	"browserslist": [
+		"defaults and supports es6-module",
+		"maintained node versions"
+	]
 }
