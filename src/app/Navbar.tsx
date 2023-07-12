@@ -1,4 +1,5 @@
 import { Icons } from '@/components/Icons';
+import SearchBar from '@/components/SearchBar';
 import UserAccountNav from '@/components/UserAccountNav';
 import { buttonVariants } from '@/components/ui/button';
 import { getAuthSession } from '@/lib/auth';
@@ -15,6 +16,7 @@ export const Navbar = async () => {
 						Chlebbit
 					</p>
 				</Link>
+				<SearchBar />
 				{session?.user ? (
 					<UserAccountNav user={session.user} />
 				) : (

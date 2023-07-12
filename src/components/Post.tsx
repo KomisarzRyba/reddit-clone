@@ -46,7 +46,7 @@ const Post: React.FC<PostProps> = ({
 								<span className='px-1'>-</span>
 							</>
 						) : null}
-						<span>Posted by u/{post.author.name}</span>{' '}
+						<span>Posted by u/{post.author.username}</span>{' '}
 						{formatTimeToNow(new Date(post.createdAt))}
 					</div>
 					<a href={`/r/${subredditName}/post/${post.id}`}>
@@ -66,7 +66,7 @@ const Post: React.FC<PostProps> = ({
 			</div>
 			<div className='z-20 text-sm p-4 sm:px-6 bg-muted rounded-b-lg'>
 				<a
-					href={`/r/${subredditName}/posts/${post.id}`}
+					href={`/r/${subredditName}/post/${post.id}`}
 					className='w-fit flex items-center gap-2'>
 					<ChatBubbleIcon className='w-4 h-4' /> {commentAmt} comments
 				</a>
