@@ -80,7 +80,7 @@ const SearchBar: React.FC<SearchBarProps> = ({}) => {
 									}}
 									key={subreddit.id}
 									value={subreddit.name}>
-									<PersonIcon className='mr-2 w-4 h-4' />
+									<PersonIcon className='mr-2 h-4 w-4' />
 									<a href={`/r/${subreddit.name}`}>
 										r/{subreddit.name}
 									</a>
