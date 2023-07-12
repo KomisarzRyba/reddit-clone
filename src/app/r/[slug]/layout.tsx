@@ -63,7 +63,7 @@ const layout = async ({
 						{children}
 					</div>
 					{/* info sidebar */}
-					<div className='hidden md:block overflow-hidden h-fit rounded-lg border order-first md:order-last'>
+					<div className='overflow-hidden h-fit rounded-lg border order-first md:order-last'>
 						<div className='px-6 py-4'>
 							<p className='font-semibold py-3'>
 								About r/{subreddit.name}
