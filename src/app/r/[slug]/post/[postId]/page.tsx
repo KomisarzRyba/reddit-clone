@@ -1,3 +1,4 @@
+import CommentSection from '@/components/CommentSection';
 import EditorOutput from '@/components/EditorOutput';
 import PostVoteServer from '@/components/post-vote/PostVoteServer';
 import { buttonVariants } from '@/components/ui/button';
@@ -75,6 +76,12 @@ const page = async ({ params }: PageProps) => {
 					<EditorOutput
 						content={post?.content ?? cachedPost.content}
 					/>
+					<Suspense
+						fallback={
+							<ReloadIcon className='w-5 h-5 animate-spin text-muted-foreground' />
+						}>
+						<CommentSection postId={post?.id ?? cachedPost.id} />
+					</Suspense>
 				</div>
 			</div>
 		</div>

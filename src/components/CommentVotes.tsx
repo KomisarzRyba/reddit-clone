@@ -2,24 +2,25 @@
 
 import { VoteType } from '.prisma/client';
 import { useCustomToast } from '@/hooks/use-custom-toast';
-import { usePrevious } from '@mantine/hooks';
-import React, { useEffect, useState } from 'react';
-import { Button } from '../ui/button';
-import { ThickArrowDownIcon, ThickArrowUpIcon } from '@radix-ui/react-icons';
-import { cn } from '@/lib/utils';
-import { useMutation } from '@tanstack/react-query';
-import { PostVoteRequest } from '@/lib/validators/vote';
-import axios, { AxiosError } from 'axios';
 import { toast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
+import { CommentVoteRequest } from '@/lib/validators/vote';
+import { usePrevious } from '@mantine/hooks';
+import { ThickArrowDownIcon, ThickArrowUpIcon } from '@radix-ui/react-icons';
+import { useMutation } from '@tanstack/react-query';
+import axios, { AxiosError } from 'axios';
+import React, { useState } from 'react';
+import { Button } from './ui/button';
+import { CommentVote } from '@prisma/client';
 
-interface PostVoteClientProps {
-	postId: string;
+interface CommentVotesProps {
+	commentId: string;
 	initialVotesAmt: number;
-	initialVote?: VoteType | null;
+	initialVote?: Pick<CommentVote, 'type'>;
 }
 
-const PostVoteClient: React.FC<PostVoteClientProps> = ({
-	postId,
+const CommentVotes: React.FC<CommentVotesProps> = ({
+	commentId,
 	initialVotesAmt,
 	initialVote,
 }) => {
@@ -28,18 +29,14 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
 	const [currentVote, setCurrentVote] = useState(initialVote);
 	const prevVote = usePrevious(currentVote);
 
-	useEffect(() => {
-		setCurrentVote(initialVote);
-	}, [initialVote]);
-
 	const { mutate: vote } = useMutation({
 		mutationFn: async (type: VoteType) => {
-			const payload: PostVoteRequest = {
-				postId: postId,
+			const payload: CommentVoteRequest = {
+				commentId: commentId,
 				voteType: type,
 			};
 
-			await axios.patch('/api/subreddit/post/vote', payload);
+			await axios.patch('/api/subreddit/post/comment/vote', payload);
 		},
 		onError: (err, voteType) => {
 			if (voteType === 'UP') setVotesAmt((prev) => prev - 1);
@@ -60,7 +57,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
 			});
 		},
 		onMutate: (type: VoteType) => {
-			if (currentVote === type) {
+			if (currentVote?.type === type) {
 				setCurrentVote(undefined);
 				if (type === 'UP') {
 					setVotesAmt((prev) => prev - 1);
@@ -68,7 +65,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
 					setVotesAmt((prev) => prev + 1);
 				}
 			} else {
-				setCurrentVote(type);
+				setCurrentVote({ type });
 				if (type === 'UP') {
 					setVotesAmt((prev) => prev + (currentVote ? 2 : 1));
 				} else if (type === 'DOWN') {
@@ -79,7 +76,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
 	});
 
 	return (
-		<div className='flex sm:flex-col gap-4 sm:gap-0 pr-6 sm:w-20 pb-4 sm:pb-0'>
+		<div className='flex gap-1'>
 			<Button
 				size='sm'
 				variant='ghost'
@@ -88,7 +85,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
 				<ThickArrowUpIcon
 					className={cn('w-5 h-5 text-slate-500', {
 						'text-emerald-500 fill-emerald-500':
-							currentVote === 'UP',
+							currentVote?.type === 'UP',
 					})}
 				/>
 			</Button>
@@ -102,7 +99,8 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
 				onClick={() => vote('DOWN')}>
 				<ThickArrowDownIcon
 					className={cn('w-5 h-5 text-slate-500', {
-						'text-red-500 fill-red-500': currentVote === 'DOWN',
+						'text-red-500 fill-red-500':
+							currentVote?.type === 'DOWN',
 					})}
 				/>
 			</Button>
@@ -110,4 +108,4 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
 	);
 };
 
-export default PostVoteClient;
+export default CommentVotes;
