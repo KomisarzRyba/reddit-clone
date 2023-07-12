@@ -27,7 +27,7 @@ const Post: React.FC<PostProps> = ({
 }) => {
 	const pRef = useRef<HTMLDivElement>(null);
 	return (
-		<div className='rounded-lg shadow'>
+		<div className='rounded-lg border shadow'>
 			<div className='px-6 py-4 flex justify-between'>
 				<PostVoteClient
 					initialVotesAmt={votesAmt}

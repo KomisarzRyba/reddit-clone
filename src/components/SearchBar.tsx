@@ -59,7 +59,7 @@ const SearchBar: React.FC<SearchBarProps> = ({}) => {
 			className='relative rounded-lg border max-w-lg z-50 overflow-visible'>
 			<CommandInput
 				className='outline-none border-none focus:outline-none focus:border-none ring-0'
-				placeholder='Search communities...'
+				placeholder='r/'
 				value={input}
 				onValueChange={(text) => {
 					setInput(text);
@@ -80,7 +80,7 @@ const SearchBar: React.FC<SearchBarProps> = ({}) => {
 									}}
 									key={subreddit.id}
 									value={subreddit.name}>
-									<PersonIcon className='mr-2 w-4 h-4' />
+									<PersonIcon className='mr-2 h-4 w-4' />
 									<a href={`/r/${subreddit.name}`}>
 										r/{subreddit.name}
 									</a>
