@@ -11,7 +11,7 @@ import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const page = () => {
+const CreateSubredditPage = () => {
 	const [input, setInput] = useState<string>('');
 	const router = useRouter();
 	const { loginToast } = useCustomToast();
@@ -98,4 +98,4 @@ const page = () => {
 	);
 };
 
-export default page;
+export default CreateSubredditPage;
